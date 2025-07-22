@@ -53,210 +53,100 @@ public class HelloWorld {
 }
 ```
 
-## 📖 Core Components
+## 📖 Complete Documentation
 
-### 🪟 Window Management
+### 📚 **[Full Documentation Hub →](docs/)**
 
-Create and manage application windows with full control:
+Vibe UI provides comprehensive documentation to help you build professional desktop applications:
 
-```java
-Window mainWindow = Window.create("My Application")
-    .size(800, 600)
-    .centerOnScreen()
-    .resizable(true)
-    .layout(Layout.border())
-    .show();
+#### 🚀 **Getting Started**
+- **[Quick Start Guide](docs/guides/getting-started.md)** - Your first Vibe UI application in minutes
+- **[Best Practices](docs/guides/best-practices.md)** - Professional development patterns and conventions
+- **[Complete Examples](docs/examples/complete-applications.md)** - Full applications with source code
 
-// Window controls
-mainWindow.minimize();
-mainWindow.maximize();
-mainWindow.restore();
-```
+#### 📋 **API Reference** 
+- **[Complete API Documentation](docs/api/README.md)** - Every component, method, and property
+- **Component Categories**: Windows, Containers, Input, Selection, Display, Layout
+- **Code Examples**: Real-world usage patterns for every feature
 
-### 🔘 Buttons and Controls
+#### 🏗️ **Available Components**
 
-```java
-// Standard Button
-Button saveButton = Button.create("Save")
-    .size(100, 30)
-    .onClick(() -> saveDocument());
+**Core UI Elements:**
+- `Window` - Application windows with full lifecycle management
+- `Panel` - Flexible container with layout management  
+- `Button`, `ToggleButton` - Interactive controls with event handling
+- `Label` - Text display with formatting and alignment
 
-// Toggle Button
-ToggleButton darkModeToggle = ToggleButton.create("Dark Mode")
-    .onChange(enabled -> applyTheme(enabled));
+**Input Components:**
+- `TextField` - Single-line text input with validation
+- `TextBox` - Multi-line text areas with word wrapping
+- `ComboBox` - Dropdown selection with editable option
+- `Spinner` - Number, date, and list value input controls
 
-// Checkbox
-CheckBox rememberMe = CheckBox.create("Remember me", true)
-    .onChange(checked -> setRememberLogin(checked));
-```
+**Selection Components:**  
+- `CheckBox` - Boolean selection controls
+- `RadioButton` - Exclusive selection groups
+- `ListBox` - Single/multi-selection lists with scrolling
+- `Slider` - Value adjustment with tick marks and labels
 
-### 📝 Text Input
+**Advanced Components:**
+- `ProgressBar` - Determinate/indeterminate progress with animation
+- `Layout` - Professional layout managers (Flow, Border, Grid, GridBag)
 
-```java
-// Single-line text field
-TextField nameField = TextField.create("Enter your name")
-    .size(200, 30)
-    .onChange(text -> validateName(text));
-
-// Multi-line text area
-TextBox descriptionBox = TextBox.createMultiline()
-    .size(300, 150)
-    .rows(5)
-    .wordWrap(true)
-    .onChange(text -> updatePreview(text));
-```
-
-### 🎛️ Value Controls
+### 💡 Quick Example
 
 ```java
-// Slider for value adjustment
-Slider volumeSlider = Slider.create(0, 100, 50)
-    .showTicks(true)
-    .majorTickSpacing(25)
-    .onChange(value -> setVolume(value));
+import com.vibeui.*;
+import javax.swing.SwingUtilities;
 
-// Radio button groups
-ButtonGroup themeGroup = RadioButton.createGroup();
-RadioButton lightTheme = RadioButton.create("Light", true).group(themeGroup);
-RadioButton darkTheme = RadioButton.create("Dark").group(themeGroup);
-```
-
-### 📦 Layout Management
-
-```java
-// Flow Layout
-Panel toolbar = Panel.create()
-    .flowLayout()
-    .add(saveButton)
-    .add(loadButton);
-
-// Border Layout
-Window window = Window.create("App")
-    .layout(Layout.border())
-    .add(toolbar, Layout.BorderConstraints.NORTH)
-    .add(contentPanel, Layout.BorderConstraints.CENTER)
-    .add(statusBar, Layout.BorderConstraints.SOUTH);
-
-// Grid Layout
-Panel buttonGrid = Panel.create()
-    .gridLayout(3, 3)
-    .add(button1).add(button2).add(button3);
-```
-
-## 🎨 Styling and Theming
-
-```java
-// Colors and fonts
-Label titleLabel = Label.create("Application Title")
-    .font("Arial", Font.BOLD, 24)
-    .foregroundColor(Color.BLUE)
-    .backgroundColor(Color.WHITE);
-
-// Borders and spacing
-Panel contentPanel = Panel.create()
-    .border(Color.GRAY, 2)
-    .padding(15)
-    .backgroundColor(new Color(248, 248, 248));
-```
-
-## 🎯 Event Handling
-
-Vibe UI supports modern Java lambda expressions for clean event handling:
-
-```java
-// Button clicks
-Button.create("Process")
-    .onClick(() -> processData())
-    .onClick(event -> handleButtonClick(event));
-
-// Text changes
-TextField.create()
-    .onChange(text -> validateInput(text))
-    .onFocus(event -> highlightField(event));
-
-// Value changes
-Slider.create(0, 100)
-    .onChange(value -> updateDisplay(value));
-```
-
-## 🏗️ Advanced Examples
-
-### Complete Application Example
-
-```java
-public class ContactManager {
+public class HelloVibe {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> createContactManager());
-    }
-    
-    private static void createContactManager() {
-        Window window = Window.create("Contact Manager")
-            .size(600, 400)
-            .centerOnScreen()
-            .layout(Layout.border());
-        
-        // Header
-        Panel header = Panel.create()
-            .backgroundColor(new Color(70, 130, 180))
-            .padding(10);
-        
-        Label title = Label.create("Contact Manager")
-            .font("Arial", Font.BOLD, 18)
-            .foregroundColor(Color.WHITE)
-            .alignCenter();
-        
-        header.add(title);
-        
-        // Main content
-        Panel mainPanel = Panel.create()
-            .layout(Layout.gridBag())
-            .padding(20);
-        
-        // Form fields
-        TextField nameField = TextField.create("Full Name")
-            .size(200, 30);
-        
-        TextField emailField = TextField.create("Email Address")
-            .size(200, 30);
-        
-        TextBox notesBox = TextBox.createMultiline()
-            .size(200, 100)
-            .placeholder("Additional notes...");
-        
-        // Buttons
-        Button saveButton = Button.create("Save Contact")
-            .onClick(() -> saveContact(nameField.getText(), 
-                                    emailField.getText(), 
-                                    notesBox.getText()));
-        
-        Button clearButton = Button.create("Clear")
-            .onClick(() -> {
-                nameField.text("");
-                emailField.text("");
-                notesBox.text("");
-            });
-        
-        // Layout components
-        mainPanel.add(Label.create("Name:"))
-                 .add(nameField)
-                 .add(Label.create("Email:"))
-                 .add(emailField)
-                 .add(Label.create("Notes:"))
-                 .add(notesBox)
-                 .add(saveButton)
-                 .add(clearButton);
-        
-        window.add(header, Layout.BorderConstraints.NORTH)
-              .add(mainPanel, Layout.BorderConstraints.CENTER)
-              .build()
-              .show();
-    }
-    
-    private static void saveContact(String name, String email, String notes) {
-        System.out.println("Saving contact: " + name + " (" + email + ")");
-        // Implementation here
+        SwingUtilities.invokeLater(() -> {
+            Window.create("Hello Vibe UI")
+                .size(400, 300)
+                .centerOnScreen()
+                .layout(Layout.flow())
+                .add(Label.create("Welcome to Vibe UI!")
+                    .font("Arial", Font.BOLD, 18))
+                .add(Button.create("Get Started")
+                    .onClick(() -> System.out.println("Ready to build!")))
+                .build()
+                .show();
+        });
     }
 }
+```
+
+**📖 [See Complete Examples →](docs/examples/complete-applications.md)**
+
+### 🎯 Core Features Highlight
+
+**Fluent API Design:**
+```java
+Button.create("Save Document")
+    .size(120, 35)
+    .backgroundColor(Color.BLUE)
+    .foregroundColor(Color.WHITE)
+    .onClick(this::saveDocument)
+    .tooltip("Save your work (Ctrl+S)");
+```
+
+**Modern Event Handling:**
+```java
+TextField.create("Enter email")
+    .onChange(email -> validateEmailFormat(email))
+    .onFocus(() -> clearValidationErrors())
+    .onBlur(() -> finalizeEmailValidation());
+```
+
+**Professional Layouts:**
+```java
+Window.create("Professional App")
+    .layout(Layout.border())
+    .add(createToolbar(), Layout.BorderConstraints.NORTH)
+    .add(createMainContent(), Layout.BorderConstraints.CENTER)  
+    .add(createStatusBar(), Layout.BorderConstraints.SOUTH);
+```
 ```
 
 ## 🔧 Requirements
@@ -292,25 +182,36 @@ mvn package
 java -cp target/classes com.vibeui.demo.ComprehensiveDemo
 ```
 
-## 📚 API Documentation
+## 📚 Documentation Structure
 
-Complete JavaDoc documentation is available in the `docs/` directory after building.
+Our comprehensive documentation covers everything you need:
 
-### Core Classes
+```
+docs/
+├── api/
+│   └── README.md           # Complete API reference with all methods
+├── guides/
+│   ├── getting-started.md  # Step-by-step tutorials and examples
+│   └── best-practices.md   # Professional development patterns
+└── examples/
+    └── complete-applications.md  # Full working applications
+```
 
-- **`Window`** - Main application window management
-- **`Component<T>`** - Base class for all UI components
-- **`Button`** - Clickable button component
-- **`Label`** - Text display component
-- **`TextField`** - Single-line text input
-- **`TextBox`** - Multi-line text area
-- **`Panel`** - Container component
-- **`Slider`** - Value adjustment slider
-- **`CheckBox`** - Checkbox control
-- **`RadioButton`** - Radio button control
-- **`ToggleButton`** - Toggle button control
-- **`Layout`** - Layout manager utilities
-- **`Events`** - Event handling utilities
+### 🔍 Find What You Need
+
+| **I want to...** | **Go to** |
+|------------------|-----------|
+| **Build my first app** | [Getting Started Guide](docs/guides/getting-started.md) |
+| **Look up a method** | [API Documentation](docs/api/README.md) |
+| **See complete examples** | [Example Applications](docs/examples/complete-applications.md) |  
+| **Follow best practices** | [Development Guide](docs/guides/best-practices.md) |
+| **Understand component usage** | [API Reference with Examples](docs/api/README.md) |
+
+### 📖 Quick Reference
+
+**All Components:** `Window`, `Panel`, `Button`, `ToggleButton`, `Label`, `TextField`, `TextBox`, `ComboBox`, `ListBox`, `CheckBox`, `RadioButton`, `Slider`, `ProgressBar`, `Spinner`, `Layout`
+
+**📋 [Complete API Documentation →](docs/api/README.md)**
 
 ## 🤝 Contributing
 
