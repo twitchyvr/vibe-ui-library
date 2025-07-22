@@ -1,5 +1,7 @@
 # Vibe UI 🎨
 
+A 100% vibe coded Java UI library. Co-Authored by Claude Code.
+
 [![Java Version](https://img.shields.io/badge/Java-11%2B-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
