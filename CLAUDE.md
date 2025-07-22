@@ -25,6 +25,9 @@ java -cp target/classes com.vibeui.demo.ComprehensiveDemo
 
 # Run the basic demo
 java -cp target/classes com.vibeui.demo.DemoApp
+
+# Run the new controls demo
+java -cp target/classes com.vibeui.demo.NewControlsDemo
 ```
 
 ## Architecture
@@ -42,9 +45,13 @@ java -cp target/classes com.vibeui.demo.DemoApp
 - `Component<T>` - Abstract base class for all UI components with fluent API
 - `Window` - Main application window management
 - `Panel` - Container component with layout management
-- `Button`, `Label`, `TextField`, `TextBox` - UI controls
+- `Button`, `Label`, `TextField`, `TextBox` - Basic UI controls
 - `CheckBox`, `RadioButton`, `ToggleButton` - Selection controls
 - `Slider` - Value adjustment control
+- `ComboBox` - Dropdown selection control with editable option
+- `ListBox` - Single/multi-selection list control with scrolling
+- `ProgressBar` - Progress indication with determinate/indeterminate modes
+- `Spinner` - Number, date, and list value input controls
 - `Layout` - Layout manager utilities
 - `Events` - Event handling utilities
 
@@ -70,6 +77,43 @@ Button.create("Click Me")
 - Flow Layout: `Layout.flow()`
 - Border Layout: `Layout.border()` with constraints
 - Grid Layout: `Layout.gridBag()` for complex layouts
+
+### Advanced Controls
+
+#### ComboBox (Dropdown)
+```java
+ComboBox.create("Option 1", "Option 2", "Option 3")
+    .selectedItem("Option 1")
+    .editable(true)
+    .onChange(selected -> handleSelection(selected));
+```
+
+#### ListBox (Selection Lists)
+```java
+ListBox.create("Item 1", "Item 2", "Item 3")
+    .multipleSelection()
+    .visibleRowCount(5)
+    .onMultiSelection(items -> handleMultiSelection(items));
+```
+
+#### ProgressBar
+```java
+ProgressBar.create(100)
+    .value(50)
+    .showString()
+    .text("Loading...")
+    .animateTo(100, 3000); // animate to 100% over 3 seconds
+```
+
+#### Spinner (Value Input)
+```java
+Spinner.createNumber(0, 0, 100, 5) // value, min, max, step
+    .onNumberChange(value -> handleValueChange(value));
+
+Spinner.createDate()
+    .dayField()
+    .onChange(date -> handleDateChange(date));
+```
 
 ## Testing
 - Uses JUnit 5 (jupiter) for testing
